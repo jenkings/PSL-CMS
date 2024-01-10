@@ -27,9 +27,9 @@ If you want to use the cms in a subfolder, edit the Config.php with path
 ## Configuration
 configuration for your page can be found at root folder in Config.php
 
-##License
+## License
 PSL-CMS is open-source software released under the GPLv3 License. Feel free to use, modify, and distribute the code.
 
-##Support
+## Support
 For any questions or assistance, please open an issue.
 Happy content managing with PSL-CMS!
