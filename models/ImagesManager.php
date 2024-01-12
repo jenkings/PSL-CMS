@@ -22,11 +22,15 @@ class ImagesManager  {
 	private $file_size;
 	
 	public function __construct ()  {
-		$this->file_name = $_FILES['imageFile']['name'];
-		$this->file_type = $_FILES['imageFile']['type'];
-		$this->temp_name = $_FILES['imageFile']['tmp_name'];
-		$this->file_error = $_FILES['imageFile']['error'];
-		$this->file_size = $_FILES['imageFile']['size'];		
+		try{
+			$this->file_name = $_FILES['imageFile']['name'];
+			$this->file_type = $_FILES['imageFile']['type'];
+			$this->temp_name = $_FILES['imageFile']['tmp_name'];
+			$this->file_error = $_FILES['imageFile']['error'];
+			$this->file_size = $_FILES['imageFile']['size'];
+		}catch(Exception $e){
+			//NOTHING
+		}
 		$this->is_validated = false;
 		$this->is_name_changed = false;
 	}	
