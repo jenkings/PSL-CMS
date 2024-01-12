@@ -18,11 +18,11 @@ PSL-CMS is a lightweight and easy-to-use Content Management System written in PH
 
 
 
-
-
 ## Installation
 All you need to start using PSL-CMS is to copy the folder to your web server.
 If you want to use the cms in a subfolder, edit the Config.php with path
+Access to your website. Administration is located on /admin subfolder relative to your site location.
+Default credentials are admin:admin
 
 ## Configuration
 configuration for your page can be found at root folder in Config.php
