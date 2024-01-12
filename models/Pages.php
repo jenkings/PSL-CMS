@@ -119,7 +119,7 @@ class Pages {
 	}
 	
 	public function update(){
-		if($_SESSION['user_type'] != 2) return;
+		if($_SESSION['user_type'] != 1) return;
 
 		if($this->id) {			
 			$stmt = $this->conn->prepare("
