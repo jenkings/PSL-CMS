@@ -35,4 +35,4 @@ For any questions or assistance, please open an issue.
 Happy content managing with PSL-CMS!
 
 ## Home page
-You can visit project homepage, which also works as demo at :[psl-cms.jan-skoda.cz](https://psl-cms.jan-skoda.cz)
+You can visit project homepage, which also works as demo at [psl-cms.jan-skoda.cz](https://psl-cms.jan-skoda.cz)
