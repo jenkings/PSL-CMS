@@ -102,14 +102,14 @@ class Pages {
 
 			$stmt = $this->conn->prepare("
 				INSERT INTO ".$this->pageTable."(`title`, `link`, `content`)
-				VALUES(:t,:l, :c)");
+				VALUES(:t, :l, :c)");
 		
 			$this->title = htmlspecialchars(strip_tags($this->title));
 			$this->link = htmlspecialchars(strip_tags($this->link));
 
-			$stmt->bindParam(":t", $this->title);
-			$stmt->bindParam(":l", $this->link);
-			$stmt->bindParam(":c;", $this->content);
+			$stmt->bindParam("t", $this->title);
+			$stmt->bindParam("l", $this->link);
+			$stmt->bindParam("c", $this->content);
 
 			
 			if($stmt->execute()){
