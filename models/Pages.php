@@ -179,7 +179,8 @@ class Pages {
 			$maxResult = $maxQuery->fetch(PDO::FETCH_ASSOC);
 			$max = ($maxResult['max'] * 1) + 1;
 
-			$dataQuery = $this->conn->prepare("SELECT title,link FROM ".$this->pageTable."");
+			$dataQuery = $this->conn->prepare("SELECT title,link FROM ".$this->pageTable." WHERE id = :id");
+			$dataQuery->bindParam("id", $this->id);
 			$dataQuery->execute();
 			$dataResult = $dataQuery->fetch(PDO::FETCH_ASSOC);
 			
