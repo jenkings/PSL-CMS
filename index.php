@@ -41,7 +41,7 @@ include('template/header.php');
 			<article>		
 			<p><?php echo $message; ?> 	</p>
 			</article>
-			<a class="btn btn-blog pull-right" href="view.php?id=<?php echo $post['id']; ?>">READ MORE</a> 
+			<a class="btn btn-blog pull-right" href="article.php?id=<?php echo $post['id']; ?>">READ MORE</a> 
 			</div>
 		<?php } ?>   	
 	</div>
