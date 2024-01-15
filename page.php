@@ -2,6 +2,7 @@
 include_once 'models/Database.php';
 include_once 'models/Pages.php';
 include_once 'models/Menu.php';
+include_once 'models/Markdown.php';
 include_once './Config.php';
 
 $database = new Database();
@@ -9,6 +10,7 @@ $db = $database->getConnection();
 
 $page = new Pages($db);
 $menu = new Menu($db);
+$markdownParser = new Markdown();
 
 $page->link = $_GET['link'];
 
@@ -32,7 +34,7 @@ include('template/header.php');
 			<h2><?php echo $post['title']; ?></h2>
 			<br><br>
 			<article>
-				<p><?php echo $content; ?> 	</p>
+				<p><?php echo $markdownParser->convertToHtml($content); ?> 	</p>
 			</article>		
 			</div>
 		
