@@ -13,6 +13,8 @@ $menu = new Menu($db);
 
 $article->id = 0;
 
+$numPages = $article->getPagesCount();
+
 $result = $article->getArticles();
 
 include('template/header.php');
@@ -46,4 +48,20 @@ include('template/header.php');
 		<?php } ?>   	
 	</div>
 </div>
+
+
+<div class="pagination">
+	<ul>
+<?php
+$curpage = (isset($_GET['page']) ? $_GET['page'] : 1);
+
+/* pagination */
+for($p = 1; $p <= $numPages;$p++){
+	echo "	<li><a href='.?page=".$p."' class='" . ($p == $curpage ? "selectedPage" : "") . "'>" . $p . "</a></li>";
+}
+
+?>
+</ul>
+</div>
+
 <?php include('template/footer.php');?>

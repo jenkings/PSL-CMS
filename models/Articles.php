@@ -10,7 +10,7 @@ class Articles {
         $this->conn = $db;
     }	    
 	
-	public function getArticles(){
+	public function getArticles($cnt = null,$offset = null){
 		$query = '';
 		if($this->id) {		
 			$query = " AND p.id ='".$this->id."'";
@@ -21,13 +21,28 @@ class Articles {
 			LEFT JOIN ".$this->categoryTable." c ON c.id = p.category_id
 			LEFT JOIN ".$this->userTable." u ON u.id = p.userid
 			WHERE p.status ='published' $query ORDER BY p.id DESC";
+
+		if(is_int($cnt)){
+			$sqlQuery .= " LIMIT " . $cnt;
+		}
+		if(is_int($offset)){
+			$sqlQuery .= " OFFSET " . $offset;
+		}
 			
 		$stmt = $this->conn->prepare($sqlQuery);		
 		$stmt->execute();
-		$result = $stmt->fetchAll();	
+		$result = $stmt->fetchAll();
 		return $result;
 	}
 	
+
+	public function getPageArticles($page = 1){
+		if(!is_int($page)){
+			$page = 1;
+		}
+		return $this->getArticles(Config::ARTICLES_PER_PAGE,(($page - 1) * Config::ARTICLES_PER_PAGE) );
+	}
+
 	function formatMessage($string, $wordsreturned) {
 		$retval = $string;  //  Just in case of a problem
 		$array = explode(" ", $string);
@@ -39,13 +54,19 @@ class Articles {
 		}
 		return $retval;
 	}
+
 	
 	public function totalPost(){		
-		$sqlQuery = "SELECT * FROM ".$this->postTable;			
+		$sqlQuery = "SELECT COUNT(*) as count FROM ".$this->postTable;			
 		$stmt = $this->conn->prepare($sqlQuery);			
 		$stmt->execute();
-		$result = $stmt->fetchAll();
-		return $result->num_rows;	
-	}	
+		$result = $stmt->fetch(PDO::FETCH_ASSOC);
+		return $result['count'];	
+	}
+
+	public function getPagesCount(){
+		return ceil($this->totalPost() / Config::ARTICLES_PER_PAGE);
+	}
+
 }
 ?>
