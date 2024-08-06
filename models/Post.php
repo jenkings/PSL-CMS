@@ -44,13 +44,12 @@ class Post {
 		$stmt->execute();
 		$result = $stmt->fetchAll();	
 		
-		$stmtTotal = $this->conn->prepare("SELECT COUNT(*) as count; FROM ".$this->postTable);
+		$stmtTotal = $this->conn->prepare("SELECT COUNT(*) as count FROM ".$this->postTable);
 		$stmtTotal->execute();
 		$allResult = $stmtTotal->fetch(PDO::FETCH_ASSOC);
-		$allRecords = $allResult['count'];
+		$allRecords = $allResult['count'] * 1;
 		
-		
-		$displayRecords = count($result);
+
 		$posts = array();		
 		foreach ($result as $post) { 				
 			$rows = array();	
@@ -76,7 +75,7 @@ class Post {
 		
 		$output = array(
 			"draw"	=>	intval($_POST["draw"]),			
-			"iTotalRecords"	=> 	$displayRecords,
+			"iTotalRecords"	=> 	count($posts),
 			"iTotalDisplayRecords"	=>  $allRecords,
 			"data"	=> 	$posts
 		);
@@ -123,12 +122,21 @@ class Post {
 			$stmt->bindParam("s", $this->status);
 			$stmt->bindParam("u", $this->updated);
 			$stmt->bindParam("cr", $this->created);
-			
-			if($stmt->execute()){
-				return $this->conn->lastInsertId();
-			}		
-		}
-	}
+			<?php
+if (session_id() == "") session_start();
+class Post {	
+   
+	private $postTable = 'articles';
+	private $categoryTable = 'categories';
+	private $userTable = 'users';	
+	private $conn;
+	
+	public function __construct($db){
+…		$result = $stmt->fetch(PDO::FETCH_ASSOC);
+		return $result['count'];	
+	}	
+}
+?>
 	
 	public function update(){
 		
