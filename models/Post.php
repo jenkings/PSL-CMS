@@ -122,21 +122,12 @@ class Post {
 			$stmt->bindParam("s", $this->status);
 			$stmt->bindParam("u", $this->updated);
 			$stmt->bindParam("cr", $this->created);
-			<?php
-if (session_id() == "") session_start();
-class Post {	
-   
-	private $postTable = 'articles';
-	private $categoryTable = 'categories';
-	private $userTable = 'users';	
-	private $conn;
-	
-	public function __construct($db){
-…		$result = $stmt->fetch(PDO::FETCH_ASSOC);
-		return $result['count'];	
-	}	
-}
-?>
+			
+			if($stmt->execute()){
+				return $this->conn->lastInsertId();
+			}		
+		}
+	}
 	
 	public function update(){
 		
